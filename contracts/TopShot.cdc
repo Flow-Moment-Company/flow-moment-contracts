@@ -47,6 +47,7 @@
 */
 
 import NonFungibleToken from 0xNFTADDRESS
+import Autograph from 0xAUTOGRAPHADDRESS
 
 pub contract TopShot: NonFungibleToken {
 
@@ -422,6 +423,10 @@ pub contract TopShot: NonFungibleToken {
         // Struct of Moment metadata
         pub let data: MomentData
 
+        // Dictionary of Autograph conforming tokens
+        // NFT is a resource type with a UInt64 ID field
+        pub let autographs: @{UInt64: Autograph.NFT}
+
         init(serialNumber: UInt32, playID: UInt32, setID: UInt32) {
             // Increment the global Moment IDs
             TopShot.totalSupply = TopShot.totalSupply + UInt64(1)
@@ -431,12 +436,15 @@ pub contract TopShot: NonFungibleToken {
             // Set the metadata struct
             self.data = MomentData(setID: setID, playID: playID, serialNumber: serialNumber)
 
+            self.autographs <- {}
+
             emit MomentMinted(momentID: self.id, playID: playID, setID: self.data.setID, serialNumber: self.data.serialNumber)
         }
 
         // If the Moment is destroyed, emit an event to indicate 
         // to outside ovbservers that it has been destroyed
         destroy() {
+            destroy self.autographs
             emit MomentDestroyed(id: self.id)
         }
     }
