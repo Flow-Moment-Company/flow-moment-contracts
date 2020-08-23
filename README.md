@@ -1,6 +1,6 @@
 # flow-moment-contracts
 
-https://discord.gg/mCtsWyS
+[Join Flow Moment Company Discord Community](https://discord.gg/mCtsWyS)
 
 ## Introduction
 
@@ -14,24 +14,24 @@ smart contract programming language designed for the Flow Blockchain.
 
 NBA Top Shot is the official digital collecitibles
 game for the National Basketball Association. Players collect and trade
-digital collectibles that represent highlights from the best players 
+digital collectibles that represent highlights from the best players
 in the world. See more at nbatopshot.com
 
-### What is Flow?
+### What is Flow
 
 Flow is a new blockchain for open worlds. Read more about it [here](https://www.onflow.org/).
 
-### What is Cadence?
+### What is Cadence
 
-Cadence is a new Resource-oriented programming language 
+Cadence is a new Resource-oriented programming language
 for developing smart contracts for the Flow Blockchain.
 Read more about it [here](https://www.docs.onflow.org)
 
 We recommend that anyone who is reading this should have already
-completed the [Cadence Tutorials](https://docs.onflow.org/docs/getting-started-1) 
+completed the [Cadence Tutorials](https://docs.onflow.org/docs/getting-started-1)
 so they can build a basic understanding of the programming language.
 
-Resource-oriented programming, and by extension Cadence, 
+Resource-oriented programming, and by extension Cadence,
 is the perfect programming environment for Non-Fungible Tokens (NFTs), because users are able
 to store their NFT objects directly in their accounts and transact
 peer-to-peer. Please see the [blog post about resources](https://medium.com/dapperlabs/resource-oriented-programming-bee4d69c8f8e)
@@ -57,13 +57,13 @@ Transactions contain the transactions that various admins and users can use
 to perform actions in the smart contract like creating plays and sets,
 minting Moments, and transfering Moments.
 
- - `contracts/` : Where the Top Shot related smart contracts live.
- - `transactions/` : This directory contains all the state-changing transactions
+ -`contracts/` : Where the Top Shot related smart contracts live.
+ -`transactions/` : This directory contains all the state-changing transactions
  that are associated with the Top Shot smart contracts.
- - `transactions/scripts/`  : This contains all the read-only Cadence scripts 
+ -`transactions/scripts/`  : This contains all the read-only Cadence scripts
  that are used to read information from the smart contract
  or from a resource in account storage.
- - `lib/` : This directory contains packages for specific programming languages
+ -`lib/` : This directory contains packages for specific programming languages
  to be able to read copies of the Top Shot smart contracts, transaction templates,
  and scripts. Also contains automated tests written in those languages. Currently,
  Go is the only language that is supported, but we are hoping to add javascript
@@ -73,16 +73,16 @@ minting Moments, and transfering Moments.
 
 Each Top Shot Moment NFT represents a play from a game in the NBA season.
 Plays are grouped into sets which usually have some overarching theme,
-like rarity or the type of the play. 
+like rarity or the type of the play.
 
 A set can have one or more plays in it and the same play can exist in
-multiple sets, but the combination of a play and a set, 
+multiple sets, but the combination of a play and a set,
 otherwise known as an edition, is unique and is what classifies an individual Moment.
 
-Multiple Moments can be minted from the same edition and each receives a 
+Multiple Moments can be minted from the same edition and each receives a
 serial number that indicates where in the edition it was minted.
 
-Each Moment is a resource object 
+Each Moment is a resource object
 with roughly the following structure:
 
 ```cadence
@@ -90,7 +90,7 @@ pub resource Moment {
 
     // global unique Moment ID
     pub let id: UInt64
-    
+
     // the ID of the Set that the Moment comes from
     pub let setID: UInt32
 
@@ -105,36 +105,36 @@ pub resource Moment {
 
 The other types that are defined in `TopShot` are as follows:
 
- - `Play`: A struct type that holds most of the metadata for the Moments.
+ -`Play`: A struct type that holds most of the metadata for the Moments.
     All plays in Top Shot will be stored and modified in the main contract.
- - `SetData`: A struct that contains constant information about sets in Top Shot
+ -`SetData`: A struct that contains constant information about sets in Top Shot
     like the name, the series, the id, and such.
- - `Set`: A resource that contains variable data for sets 
+ -`Set`: A resource that contains variable data for sets
     and the functionality to modify sets,
     like adding and retiring plays, locking the set, and minting Moments from
     the set.
- - `MomentData`: A struct that contains the metadata associated with a Moment.
+ -`MomentData`: A struct that contains the metadata associated with a Moment.
     instances of it will be stored in each Moment.
- - `NFT`: A resource type that is the NFT that represents the Moment
+ -`NFT`: A resource type that is the NFT that represents the Moment
     highlight a user owns. It stores its unique ID and other metadata. This
     is the collectible object that the users store in their accounts.
- - `Collection`: Similar to the `NFTCollection` resource from the NFT
+ -`Collection`: Similar to the `NFTCollection` resource from the NFT
     example, this resource is a repository for a user's Moments.  Users can
-    withdraw and deposit from this collection and get information about the 
+    withdraw and deposit from this collection and get information about the
     contained Moments.
- - `Admin`: This is a resource type that can be used by admins to perform
-    various acitions in the smart contract like starting a new series, 
+ -`Admin`: This is a resource type that can be used by admins to perform
+    various acitions in the smart contract like starting a new series,
     creating a new play or set, and getting a reference to an existing set.
 
 Metadata structs associated with plays and sets are stored in the main smart contract
-and can be queried by anyone. For example, If a player wanted to find out the 
+and can be queried by anyone. For example, If a player wanted to find out the
 name of the team that the player represented in their Moment plays for, they
-would call a public function in the `TopShot` smart contract 
+would call a public function in the `TopShot` smart contract
 called `getPlayMetaDataByField`, providing, from their owned Moment,
-the play and field that they want to query. 
+the play and field that they want to query.
 They can do the same with information about sets.
 
-The power to create new plays, sets, and Moments rests 
+The power to create new plays, sets, and Moments rests
 with the owner of the `Admin` resource.
 
 Admins create plays and sets which are stored in the main smart contract,
@@ -142,17 +142,17 @@ Admins can add plays to sets to create editions, which Moments can be minted fro
 
 Admins also can restrict the abilities of sets and editions to be further expanded.
 A set begins as being unlocked, which means plays can be added to it,
-but when an admin locks the set, plays can no longer be added to it. 
+but when an admin locks the set, plays can no longer be added to it.
 This cannot be reversed.
 
 The same applies to editions. Editions start out open, and an admin can mint as
-many Moments they want from the edition. When an admin retires the edition, 
+many Moments they want from the edition. When an admin retires the edition,
 Moments can no longer be minted from that edition. This cannot be reversed.
 
 These rules are in place to ensure the scarcity of sets and editions
 once they are closed.
 
-Once a user owns a Moment object, that Moment is stored directly 
+Once a user owns a Moment object, that Moment is stored directly
 in their account storage via their `Collection` object. The collection object
 contains a dictionary that stores the Moments and gives utility functions
 to move them in and out and to read data about the collection and its Moments.
@@ -160,8 +160,8 @@ to move them in and out and to read data about the collection and its Moments.
 ## How to Deploy and Test the Top Shot Contract
 
 The first step for using any smart contract is deploying it to the blockchain,
-or emulator in our case. Do these commands in vscode. 
-See the [vscode extension instructions](https://docs.onflow.org/docs/visual-studio-code-extension) 
+or emulator in our case. Do these commands in vscode.
+See the [vscode extension instructions](https://docs.onflow.org/docs/visual-studio-code-extension)
 to learn how to use it.
 
  1. Start the emulator with the `Run emulator` vscode command.
@@ -169,12 +169,12 @@ to learn how to use it.
  3. In `NonFungibleToken.cdc`, click the `deploy contract to account` to deploy it.
  4. Switch to a different account.
  5. In `TopShot.cdc`, make sure it imports `NonFungibleToken` from the account you deployed it to.
- 6. Click the `deploy contract to account` button that appears over the 
+ 6. Click the `deploy contract to account` button that appears over the
     `TopShot` contract declaration to deploy it to a new account.
 
 This deploys the contract code. It also runs the contract's
 `init` function, which initializes the contract storage variables,
-stores the `Collection` and `Admin` resources 
+stores the `Collection` and `Admin` resources
 in account storage, and creates links to the `Collection`.
 
 As you can see, whenever we want to call a function, read a field,
@@ -189,18 +189,18 @@ to interact with the contracts. A common order of creating new Moments would be
 2. Creating new sets with `transactions/admin/create_set.cdc`.
 3. Adding plays to the sets to create editions
    with `transactions/admin/add_plays_to_set.cdc`.
-4. Minting Moments from those editions with 
+4. Minting Moments from those editions with
    `transactions/admin/batch_mint_moment.cdc`.
 
 You can also see the scripts in `transactions/scripts` to see how information
 can be read from the real Top Shot smart contract deployed on the
-Flow Beta Mainnet. 
+Flow Beta Mainnet.
 
 ### Accessing the NBA Top Shot smart contract on Flow Beta Mainnet
 
 The Flow Beta mainnet is still a work in progress and still has
 a limited number of accounts that can run nodes and submit transactions.
-This means that the real Top Shot smart contract deployed on chain 
+This means that the real Top Shot smart contract deployed on chain
 is still not accessible by the public. This is only temporary and can be expected
 to open up to the public when the Flow mainnet is released to the public in Q3-Q4
 2020. Stay tuned in the NBA Top Shot and Flow discord channels for more info.
@@ -212,45 +212,46 @@ that show when specific actions are taken, like transferring an NFT. This
 is a list of events that can be emitted, and what each event means.
 You can find definitions for interpreting these events in Go by seeing
 the `lib/go/events` package.
-    
+
 - `pub event ContractInitialized()`
-    
+
     This event is emitted when the `TopShot` contract is created.
 
-#### Events for plays
+### Events for plays
+
 - `pub event PlayCreated(id: UInt32, metadata: {String:String})`
-    
+
     Emitted when a new play has been created and added to the smart contract by an admin.
 
 - `pub event NewSeriesStarted(newCurrentSeries: UInt32)`
-    
+
     Emitted when a new series has been triggered by an admin.
 
-#### Events for set-Related actions
+### Events for set-Related actions
 
 - `pub event SetCreated(setID: UInt32, series: UInt32)`
-    
+
     Emitted when a new set is created.
-    
+
 - `pub event PlayAddedToSet(setID: UInt32, playID: UInt32)`
-    
+
     Emitted when a new play is added to a set.
-    
+
 - `pub event PlayRetiredFromSet(setID: UInt32, playID: UInt32, numMoments: UInt32)`
 
-    Emitted when a play is retired from a set. Indicates that 
+    Emitted when a play is retired from a set. Indicates that
     that play/set combination and cannot be used to mint moments any more.
-    
+
 - `pub event SetLocked(setID: UInt32)`
 
     Emitted when a set is locked, meaning plays cannot be added.
-    
+
 - `pub event MomentMinted(momentID: UInt64, playID: UInt32, setID: UInt32, serialNumber: UInt32)`
 
-    Emitted when a Moment is minted from a set. The `momentID` is the global unique identifier that differentiates a Moment from all other Top Shot Moments in existence. The `serialNumber` is the identifier that differentiates the Moment within an Edition. It corresponds to the place in that edition where it was minted. 
+    Emitted when a Moment is minted from a set. The `momentID` is the global unique identifier that differentiates a Moment from all other Top Shot Moments in existence. The `serialNumber` is the identifier that differentiates the Moment within an Edition. It corresponds to the place in that edition where it was minted.
 
-#### Events for Collection-related actions
-    
+### Events for Collection-related actions
+
 - `pub event Withdraw(id: UInt64, from: Address?)`
 
     Emitted when a Moment is withdrawn from a collection. `id` refers to the global Moment ID. If the collection was in an account's storage when it was withdrawn, `from` will show the address of the account that it was withdrawn from. If the collection was not in storage when the Moment was withdrawn, `from` will be `nil`.
@@ -268,17 +269,17 @@ When a user wants to sell their Moment, they create a sale collection
 in their account and specify a beneficiary of a cut of the sale if they wish.
 
 A Top Shot Sale Collection functions similarly to a regular Moment collection,
-but instead of a regular deposit function, the user has function to set a 
+but instead of a regular deposit function, the user has function to set a
 price for their Moment when they deposit it.
 
-When another user wants to buy the Moment that is for sale, they simply send 
-their fungible tokens to the `purchase` function 
+When another user wants to buy the Moment that is for sale, they simply send
+their fungible tokens to the `purchase` function
 and if they sent the correct amount, they get the Moment back.
 
-#### Events for Market-related actions
+### Events for Market-related actions
 
 - `pub event MomentListed(id: UInt64, price: UFix64, seller: Address?)`
-   
+
    Emitted when a user lists a Moment for sale in their SaleCollection.
 
 - `pub event MomentPriceChanged(id: UInt64, newPrice: UFix64, seller: Address?)`
@@ -298,111 +299,70 @@ and if they sent the correct amount, they get the Moment back.
    Emitted when a seller changes the percentage cut that is taken
    from their sales and sent to a beneficiary.
 
-# Flow Non-Fungible Token Standard
+## Flow Non-Fungible Token Standard
 
-This is a description of the work-in-progress standard for 
-non-fungible token contracts on the Flow Blockchain.  It is meant to contain 
-the minimum functionality to implement a safe, secure, easy to understand, 
+This is a description of the work-in-progress standard for
+non-fungible token contracts on the Flow Blockchain.  It is meant to contain
+the minimum functionality to implement a safe, secure, easy to understand,
 and easy to use non-fungible token contract in Cadence.
-
-## What is Flow?
-
-Flow is a new blockchain for open worlds. Read more about it [here](https://www.onflow.org/).
-
-## What is Cadence?
-
-Cadence is a new Resource-oriented programming language 
-for developing smart contracts for the Flow Blockchain.
-Read more about it [here](https://www.docs.onflow.org)
-
-We recommend that anyone who is reading this should have already
-completed the [Cadence Tutorials](https://docs.onflow.org/docs/getting-started-1) 
-so they can build a basic understanding of the programming language.
-
-Resource-oriented programming, and by extension Cadence, 
-is the perfect programming environment for Non-Fungible Tokens (NFTs), because users are able
-to store their NFT objects directly in their accounts and transact
-peer-to-peer. Please see the [blog post about resources](https://medium.com/dapperlabs/resource-oriented-programming-bee4d69c8f8e)
-to understand why they are perfect for digital assets.
-
-## Feedback
-
-Flow and Cadence are both still in development, so this standard will still 
-be going through a lot of changes as the protocol and language evolves, 
-and as we receive feedback from the community about the standard.
-
-We'd love to hear from anyone who has feedback. 
-Main feedback we are looking for is:
-
-- Are there any features that are missing from the standard?
-- Are the features that we have included defined in the best way possible?
-- Are there any pre and post conditions that are missing?
-- Are the pre and post conditions defined well enough? Error messages?
-- Are there any other actions that need an event defined for them?
-- Are the current event definitions clear enough and do they provide enough information?
-- Are the variable, function, and parameter names descriptive enough?
-- Are there any openings for bugs or vulnerabilities that we are not noticing?
-
-Please create an issue in this repo if there is a feature that
-you believe needs discussing or changing.
 
 ## Core Features (main NonFungibleToken interface)
 
 These features are the ones that are specified in the interface for NFTs.
-Please be aware, that a NFT contract that implements the interface can 
+Please be aware, that a NFT contract that implements the interface can
 include other features in addition to these if they so wish. Also be aware
 that with the way that Cadence smart contracts define objects and with how
-objects can be integrated easily into other contracts, many more actions and 
-features are possible even with a contract that only defines the bare minimim 
+objects can be integrated easily into other contracts, many more actions and
+features are possible even with a contract that only defines the bare minimum
 functionality.
 
-The main interface requires that implementing types define a `NFT` resource 
+The main interface requires that implementing types define a `NFT` resource
 and a `Collection` resource that contains and manages these NFTs.
 
-#### 1 - Getting metadata for the token smart contract via the fields of the contract:
+### 1 - Getting metadata for the token smart contract via the fields of the contract
 
 - Get the total number of tokens that have been created by the contract
-    - `pub var totalSupply: UInt64`
+  - `pub var totalSupply: UInt64`
 - Event that gets emitted when the contract is initialized
-    - `event ContractInitialized()`
+  - `event ContractInitialized()`
 
-#### 2 - Retrieving the token fields of an NFT in a user's collection
+### 2 - Retrieving the token fields of an NFT in a user's collection
 
 - unique identifier
-    - `pub let id: UInt64`
+  - `pub let id: UInt64`
 - function to borrow a reference to a specific NFT in the collection
-    - `pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT`
+  - `pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT`
         - the caller can read fields and call functions on the NFT with
           the reference
 
-#### 3 - Withdrawing a single token id using the `withdraw` function of the owner's collection
+### 3 - Withdrawing a single token id using the `withdraw` function of the owner's collection
 
 - withdraw event
-    - `event Withdraw(id: UInt64, from: Address?)`
+  - `event Withdraw(id: UInt64, from: Address?)`
 - Provider interface
-    - `pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT`
+  - `pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT`
 
-#### 5 - Depositing a single token id using the recipient's *deposit function*
+### 4 - Depositing a single token id using the recipient's *deposit function*
 
 - deposit event
-    - `event Deposit(id: UInt64, to: Address?)`
+  - `event Deposit(id: UInt64, to: Address?)`
 - Receiver interface
-    - `pub fun deposit(token: @NonFungibleToken.NFT)`
-    - **IMPORTANT**: In order to comply with the deposit function in the interface, an implementation MUST take a `@NonFungibleToken.NFT` resource as an argument. This means that anyone can send a resource object that conforms to `@NonFungibleToken.NFT` to a deposit function. In an implementation, you MUST cast the `token` as your specific token type before depositing it or you will deposit another token type into your collection:
+  - `pub fun deposit(token: @NonFungibleToken.NFT)`
+  - **IMPORTANT**: In order to comply with the deposit function in the interface, an implementation MUST take a `@NonFungibleToken.NFT` resource as an argument. This means that anyone can send a resource object that conforms to `@NonFungibleToken.NFT` to a deposit function. In an implementation, you MUST cast the `token` as your specific token type before depositing it or you will deposit another token type into your collection:
     `let token <- token as! @ExampleNFT.NFT`
 
-#### 7 - Retrieving a list of the token IDs in the collection
+### 5 - Retrieving a list of the token IDs in the collection
 
 - `getIDs(): [UInt64]` returns an array of all the tokens in the collection
 
-#### 8 - Creating an empty collection resource
+### 6 - Creating an empty collection resource
 
 - `pub fun createEmptyCollection(): @NonFungibleToken.NFTCollection`
 - no event
 - defined in the contract
 - the returned collection must not contain any NFTs
 
-#### 8 - NFTCollection Resource Destructor
+### 7 - NFTCollection Resource Destructor
 
 - no event
 
@@ -417,7 +377,6 @@ This covers much of the same ground that a spec like ERC-721 or ERC-1155 covers,
 - Transfers can trigger actions because users can define custom `Receivers` to execute certain code when a token is sent.
 - Easy ownership indexing:  Instead of having to iterate through all tokens to find which ones you own, you have them all stored in your account's collection and can get the list of the ones you own instantly
 
-
 ## Metadata
 
 We are still trying to think about how to do token metadata, which is very important. We want to be able to have all metadata on-chain, but we haven't made much progress discussing or designing it.
@@ -425,56 +384,13 @@ We are still trying to think about how to do token metadata, which is very impor
 ## How to test the standard
 
 If you want to test out these contracts, we recommend either testing them
-with the [Flow Playground](play.onflow.org) 
+with the [Flow Playground](play.onflow.org)
 or with the [Visual Studio Code Extension](https://github.com/onflow/cadence/tree/master/tools/vscode-extension).
 
 The steps to follow are:
+
 1. Deploy `NonFungibleToken.cdc`
 2. Deploy `ExampleNFT.cdc`, importing `NonFungibleToken` from the address you deployed it to.
 
 Then you can experiment with some of the other transactions and scripts in `transactions/`
 or even write your own. You'll need to replace some of the import address placeholders with addresses that you deploy to, as well as some of the transaction arguments.
-
-# Running Automated Tests
-
-You can find automated tests in the `lib/go/test/nft_test.go` file. It uses the transaction templates that are contained in the `lib/go/templates/templates.go` file. Currently, these rely on a dependency from a private dapper labs repository to run, so external users will not be able to run them. We are working on making all of this public so anyone can run tests, but haven't completed this work yet.
-
-## Bonus Features 
-
-**(These could each be defined as a separate interface and standard and are probably not part of the main standard) They are not implemented in this repository yet**
-
-10- Withdrawing tokens from someone else's Collection by using their `Provider` reference.
-
-- approved withdraw event
-- Providing a resource that only approves an account to withdraw a specific amount per transaction or per day/month/etc.
-- Returning the list of tokens that an account can withdraw for another account.
-- Reading the balance of the account that you have permission to send tokens for
-- Owner is able to increase and decrease the approval at will, or revoke it completely
-    - This is much harder than anticipated
-
-11 - Standard for Composability/Extensibility 
-
-12 - Minting a specific amount of tokens using a specific minter resource that an owner can control
-
-- tokens minted event
-- Setting a cap on the total number of tokens that can be minted at a time or overall
-- Setting a time frame where this is allowed
-
-13 - Burning a specific amount of tokens using a specific burner resource that an owner controls
-
-- tokens burnt event
-- Setting a cap on the number of tokens that can be burned at a time or overall
-- Setting a time frame where this is allowed
-
-14 - Pausing Token transfers (maybe a way to prevent the contract from being imported? probably not a good idea)
-
-15 - Cloning the token to create a new token with the same distribution
-
-## License 
-
-The works in these folders 
-/onflow/flow-NFT/blob/master/contracts/ExampleNFT.cdc 
-/onflow/flow-NFT/blob/master/contracts/NonFungibleToken.cdc
-
-are under the Unlicense
-https://github.com/onflow/flow-NFT/blob/master/LICENSE
