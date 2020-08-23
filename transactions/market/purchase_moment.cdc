@@ -1,7 +1,7 @@
-import FungibleToken from 0xFUNGIBLETOKENADDRESS
-import DapperUtilityCoin from 0xDUCADDRESS
-import TopShot from 0xTOPSHOTADDRESS
-import Market from 0xMARKETADDRESS
+import FungibleToken from 0x01cf0e2f2f715450
+import DapperUtilityCoin from 0x01cf0e2f2f715450
+import TopShot from 0x179b6b1cb6755e31
+import Market from 0x179b6b1cb6755e31
 
 // This transaction is for a user to purchase a moment that another user
 // has for sale in their sale collection

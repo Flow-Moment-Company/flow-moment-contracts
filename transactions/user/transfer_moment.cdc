@@ -1,4 +1,4 @@
-import TopShot from 0xTOPSHOTADDRESS
+import TopShot from 0x179b6b1cb6755e31
 
 // This transaction is how a topshot user would transfer a moment
 // from their account to another account

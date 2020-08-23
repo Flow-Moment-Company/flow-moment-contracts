@@ -1,5 +1,5 @@
-import TopShot from 0xTOPSHOTADDRESS
-import Market from 0xMARKETADDRESS
+import TopShot from 0x179b6b1cb6755e31
+import Market from 0x179b6b1cb6755e31
 
 // This transaction is for a user to stop a moment sale in their account
 // by withdrawing that moment from their sale collection and depositing

@@ -1,5 +1,5 @@
-import TopShot from 0xTOPSHOTADDRESS
-import Market from 0xMARKETADDRESS
+import TopShot from 0x179b6b1cb6755e31
+import Market from 0x179b6b1cb6755e31
 
 // This transaction is for a user to put a new moment up for sale
 // They must have TopShot Collection and a Market Sale Collection

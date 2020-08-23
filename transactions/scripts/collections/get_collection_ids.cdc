@@ -1,4 +1,4 @@
-import TopShot from 0xTOPSHOTADDRESS
+import TopShot from 0x179b6b1cb6755e31
 
 // This is the script to get a list of all the moments an account owns
 // Just change the argument to `getAccount` to whatever account you want

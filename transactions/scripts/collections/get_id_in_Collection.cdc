@@ -1,4 +1,4 @@
-import TopShot from 0xTOPSHOTADDRESS
+import TopShot from 0x179b6b1cb6755e31
 
 // This script returns true if a moment with the specified ID
 // exists in a user's collection

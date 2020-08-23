@@ -1,4 +1,4 @@
-import TopShot from 0xTOPSHOTADDRESS
+import TopShot from 0x179b6b1cb6755e31
 
 // This transaction gets the serial number of a moment
 // by borrowing a reference to the moment 

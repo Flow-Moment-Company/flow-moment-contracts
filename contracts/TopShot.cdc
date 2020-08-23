@@ -46,8 +46,8 @@
 
 */
 
-import NonFungibleToken from 0xNFTADDRESS
-import Autograph from 0xAUTOGRAPHADDRESS
+import NonFungibleToken from 0x01cf0e2f2f715450
+import Autograph from 0xf3fcd2c1a78f5eee
 
 pub contract TopShot: NonFungibleToken {
 
@@ -888,4 +888,5 @@ pub contract TopShot: NonFungibleToken {
         emit ContractInitialized()
     }
 }
+ 
  

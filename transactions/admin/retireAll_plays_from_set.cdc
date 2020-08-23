@@ -1,4 +1,4 @@
-import TopShot from 0xTOPSHOTADDRESS
+import TopShot from 0x179b6b1cb6755e31
 
 // This transaction is for retiring all plays from a set, which
 // makes it so that moments can no longer be minted

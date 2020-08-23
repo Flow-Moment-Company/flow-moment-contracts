@@ -1,5 +1,5 @@
-import NonFungibleToken from 0xNFTADDRESS
-import ExampleNFT from 0xNFTCONTRACTADDRESS
+import NonFungibleToken from 0x01cf0e2f2f715450
+import ExampleNFT from 0x179b6b1cb6755e31
 
 // This transaction is for transferring and NFT from 
 // one account to another

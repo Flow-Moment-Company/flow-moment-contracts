@@ -1,5 +1,5 @@
-import NonFungibleToken from 0xNFTADDRESS
-import ExampleNFT from 0xNFTCONTRACTADDRESS
+import NonFungibleToken from 0x01cf0e2f2f715450
+import ExampleNFT from 0x179b6b1cb6755e31
 
 // This script reads metadata about an NFT in a user's collection
 pub fun main(account: Address): UInt64 {

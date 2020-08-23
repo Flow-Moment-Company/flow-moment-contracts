@@ -1,4 +1,4 @@
-import Market from 0xMARKETADDRESS
+import Market from 0x179b6b1cb6755e31
 
 transaction(beneficiaryAccount: Address, cutPercentage: UFix64) {
     prepare(acct: AuthAccount) {
