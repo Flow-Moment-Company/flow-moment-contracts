@@ -40,11 +40,11 @@ transaction() {
             "TotalYearsExperience": "8",
             "Weight": "226",
             "Video": "https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Animated_1080_1920_Black.mp4",
-            "Game": "https://nbatopshot.com/cdn-cgi/image/width=582/https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Game_2880_2880_Black.jpg",
-            "Category": "https://nbatopshot.com/cdn-cgi/image/width=582/https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Category_2880_2880_Black.jpg",
-            "Hero": "https://nbatopshot.com/cdn-cgi/image/width=582/https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Hero_2880_2880_Black.jpg",
-            "ReverseHero": "https://nbatopshot.com/cdn-cgi/image/width=582/https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_ReverseHero_2880_2880_Black.jpg",
-            "Logos": "https://nbatopshot.com/cdn-cgi/image/width=582/https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Logos_2880_2880_Black.jpg"
+            "Game": "https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Game_2880_2880_Black.jpg",
+            "Category": "https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Category_2880_2880_Black.jpg",
+            "Hero": "https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Hero_2880_2880_Black.jpg",
+            "ReverseHero": "https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_ReverseHero_2880_2880_Black.jpg",
+            "Logos": "https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Logos_2880_2880_Black.jpg"
         })
 
         // Borrow a reference to the set to be added to
