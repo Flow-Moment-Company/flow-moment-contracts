@@ -442,7 +442,7 @@ pub contract TopShot: NonFungibleToken {
         }
 
         // If the Moment is destroyed, emit an event to indicate 
-        // to outside ovbservers that it has been destroyed
+        // to outside observers that it has been destroyed
         destroy() {
             destroy self.autographs
             emit MomentDestroyed(id: self.id)
@@ -554,7 +554,7 @@ pub contract TopShot: NonFungibleToken {
     pub resource Collection: MomentCollectionPublic, NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic { 
         // Dictionary of Moment conforming tokens
         // NFT is a resource type with a UInt64 ID field
-        pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
+        pub let ownedNFTs: @{UInt64: NonFungibleToken.NFT}
 
         init() {
             self.ownedNFTs <- {}
