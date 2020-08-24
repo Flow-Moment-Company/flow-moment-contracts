@@ -8,6 +8,9 @@ transaction() {
         let admin = acct.borrow<&TopShot.Admin>(from: /storage/TopShotAdmin)
             ?? panic("Could not borrow a reference to the Admin resource")
 
+        // Increment the series number
+        admin.startNewSeries()
+
         // Create a set with the specified name
         admin.createSet(name: "Base Set")
 
@@ -39,6 +42,8 @@ transaction() {
             "TeamAtMomentNBAID": "",
             "TotalYearsExperience": "8",
             "Weight": "226",
+            "Hash": "6aaed757-2d22-44c7-8f64-e7a46ca0c13e",
+            "Rarity": "Common",
             "Video": "https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Animated_1080_1920_Black.mp4",
             "Game": "https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Game_2880_2880_Black.jpg",
             "Category": "https://assets.nbatopshot.com/editions/1_base_set_common/6aaed757-2d22-44c7-8f64-e7a46ca0c13e/play_6aaed757-2d22-44c7-8f64-e7a46ca0c13e_1_base_set_common_capture_Category_2880_2880_Black.jpg",
