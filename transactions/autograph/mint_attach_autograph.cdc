@@ -20,14 +20,14 @@ transaction(momentID: UInt64, metadata: {String: String}) {
         let moment = collectionRefTopShot.borrowMoment(id: momentID)
             ?? panic("Could not borrow a reference to the specified moment")
 
-        // Save author resouce
+        // Save author resource
         acct.save(<-Autograph.createAuthor(), to: /storage/AutographAuthor)
         let authorRef = acct.borrow<&Autograph.Author>(from: /storage/AutographAuthor)!
 
         // Mint a new NFT
         let autograph <- Autograph.mintAutograph(metadata: metadata, author: authorRef)
 
-        // destroy the author resouce
+        // destroy the author resource
         destroy <-acct.load<@Autograph.Author>(from: /storage/AutographAuthor)
         
         // Attach the autograph to the moment

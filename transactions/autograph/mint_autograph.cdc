@@ -6,14 +6,14 @@ import Autograph from 0xf3fcd2c1a78f5eee
 transaction(metadata: {String: String}, recipientAddr: Address) {
     prepare(acct: AuthAccount) {
 
-        // Save author resouce
+        // Save author resource
         acct.save(<-Autograph.createAuthor(), to: /storage/AutographAuthor)
         let authorRef = acct.borrow<&Autograph.Author>(from: /storage/AutographAuthor)!
 
         // Mint a new NFT
         let autograph <- Autograph.mintAutograph(metadata: metadata, author: authorRef)
 
-        // destroy the author resouce
+        // destroy the author resource
         destroy <-acct.load<@Autograph.Author>(from: /storage/AutographAuthor)
 
         // get the public account object for the recipient
