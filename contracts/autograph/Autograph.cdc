@@ -36,7 +36,7 @@ pub contract Autograph: NonFungibleToken {
     pub event ContractInitialized()
 
     // Emitted when a Autograph is minted
-    pub event AutographMinted(AutographID: UInt64, metadata: {String: String})
+    pub event AutographMinted(AutographID: UInt64, metadata: {String: String}, author: Address)
 
     // Events for Collection-related actions
     //
@@ -78,7 +78,10 @@ pub contract Autograph: NonFungibleToken {
         // Dictionary of Autograph metadata
         pub let metadata: {String: String}
 
-        init(metadata: {String: String}) {
+        // Address of NFT minter
+        pub let author: Address
+
+        init(metadata: {String: String}, author: Address) {
             pre {
                 metadata.length != 0: "New Autograph metadata cannot be empty"
             }
@@ -90,7 +93,10 @@ pub contract Autograph: NonFungibleToken {
             // Set the metadata struct
             self.metadata = metadata
 
-            emit AutographMinted(AutographID: self.id, metadata: self.metadata)
+            // Set author address
+            self.author = author
+
+            emit AutographMinted(AutographID: self.id, metadata: self.metadata, author: self.author)
         }
 
         // If the Autograph is destroyed, emit an event to indicate 
@@ -274,7 +280,7 @@ pub contract Autograph: NonFungibleToken {
     // Returns: The NFT that was minted
     // 
     pub fun mintAutograph(metadata: {String: String}): @NFT {
-        return <-create NFT(metadata: metadata)
+        return <-create NFT(metadata: metadata, author: self.account.address)
     }
 
     // -----------------------------------------------------------------------

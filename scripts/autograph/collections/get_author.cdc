@@ -1,17 +1,16 @@
 import Autograph from 0xf3fcd2c1a78f5eee
 
-// This script gets the metadata associated with a autograph
+// This script gets the author associated with a autograph
 // in a collection by looking up its ID and then searching
-// for that autograph's metadata in the Autograph contract
+// for that autograph's author in the Autograph contract
 
 // Paramters
 // account: The Flow Address of the account whose autograph data needs to be read
 // id: The unique ID for the autograph whose data needs to be read
 //
-// Returns: {String: String} A dictionary of all the metadata associated
-// with the specified autograph
+// Returns: Address of the specified autograph author
 
-pub fun main(account: Address, id: UInt64): {String: String} {
+pub fun main(account: Address, id: UInt64): Address {
 
     // get the public capability for the owner's autograph collection
     // and borrow a reference to it
@@ -23,7 +22,7 @@ pub fun main(account: Address, id: UInt64): {String: String} {
     let token = collectionRef.borrowAutograph(id: id)
         ?? panic("Could not borrow a reference to the specified autograph")
 
-    // Get the autograph's metadata
-    log(token.metadata)
-    return token.metadata
+    // Get the autograph's author
+    log(token.author)
+    return token.author
 }
