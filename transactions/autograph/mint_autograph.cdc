@@ -4,9 +4,17 @@ import Autograph from 0xf3fcd2c1a78f5eee
 // and deposit it in a user's collection
 
 transaction(metadata: {String: String}, recipientAddr: Address) {
-    execute {
+    prepare(acct: AuthAccount) {
+
+        // Save author resouce
+        acct.save(<-Autograph.createAuthor(), to: /storage/AutographAuthor)
+        let authorRef = acct.borrow<&Autograph.Author>(from: /storage/AutographAuthor)!
+
         // Mint a new NFT
-        let autograph <- Autograph.mintAutograph(metadata: metadata)
+        let autograph <- Autograph.mintAutograph(metadata: metadata, author: authorRef)
+
+        // destroy the author resouce
+        destroy <-acct.load<@Autograph.Author>(from: /storage/AutographAuthor)
 
         // get the public account object for the recipient
         let recipient = getAccount(recipientAddr)
@@ -19,3 +27,4 @@ transaction(metadata: {String: String}, recipientAddr: Address) {
         receiverRef.deposit(token: <-autograph)
     }
 }
+ 

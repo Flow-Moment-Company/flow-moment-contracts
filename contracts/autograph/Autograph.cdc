@@ -260,6 +260,10 @@ pub contract Autograph: NonFungibleToken {
         }
     }
 
+    // The empty resource used to set the author without needing to pass AuthAccount
+    // to Autograph mint funtion
+    pub resource Author { }
+
     // -----------------------------------------------------------------------
     // Autograph contract-level function definitions
     // -----------------------------------------------------------------------
@@ -273,14 +277,22 @@ pub contract Autograph: NonFungibleToken {
         return <-create Autograph.Collection()
     }
 
+    // createAuthor creates a new, Author object so that
+    // a user can mint an Autograph with their address.
+    //
+    pub fun createAuthor(): @Author {
+        return <-create Author()
+    }
+
     // mintAutograph mints a new Autograph and returns the newly minted Autograph
     // 
     // Parameters: metadata: Dictionary of Autograph metadata
+    //             author: Author resource reference to get author address
     //
     // Returns: The NFT that was minted
     // 
-    pub fun mintAutograph(metadata: {String: String}): @NFT {
-        return <-create NFT(metadata: metadata, author: self.account.address)
+    pub fun mintAutograph(metadata: {String: String}, author: &Author): @NFT {
+        return <-create NFT(metadata: metadata, author: author.owner!.address)
     }
 
     // -----------------------------------------------------------------------
