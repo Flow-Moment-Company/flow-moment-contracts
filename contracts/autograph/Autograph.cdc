@@ -9,7 +9,7 @@
     The contract manages the data associated with all the Autograph NFTs
     
     When Autographs are minted, they are initialized with a metadata dictionary and
-    are returned by the minter.
+    author address.
 
     The contract also defines a Collection resource. This is an object that 
     every Autograph NFT owner will store in their account
@@ -35,17 +35,17 @@ pub contract Autograph: NonFungibleToken {
     // Emitted when the Autograph contract is created
     pub event ContractInitialized()
 
-    // Emitted when a Autograph is minted
-    pub event AutographMinted(AutographID: UInt64, metadata: {String: String}, author: Address)
+    // Emitted when an Autograph is minted
+    pub event AutographMinted(autographID: UInt64, metadata: {String: String}, author: Address)
 
     // Events for Collection-related actions
     //
-    // Emitted when a Autograph is withdrawn from a Collection
+    // Emitted when an Autograph is withdrawn from a Collection
     pub event Withdraw(id: UInt64, from: Address?)
-    // Emitted when a Autograph is deposited into a Collection
+    // Emitted when an Autograph is deposited into a Collection
     pub event Deposit(id: UInt64, to: Address?)
 
-    // Emitted when a Autograph is destroyed
+    // Emitted when an Autograph is destroyed
     pub event AutographDestroyed(id: UInt64)
 
     // -----------------------------------------------------------------------
@@ -96,7 +96,7 @@ pub contract Autograph: NonFungibleToken {
             // Set author address
             self.author = author
 
-            emit AutographMinted(AutographID: self.id, metadata: self.metadata, author: self.author)
+            emit AutographMinted(autographID: self.id, metadata: self.metadata, author: self.author)
         }
 
         // If the Autograph is destroyed, emit an event to indicate 
@@ -174,13 +174,13 @@ pub contract Autograph: NonFungibleToken {
             return <-batchCollection
         }
 
-        // deposit takes a Autograph and adds it to the Collections dictionary
+        // deposit takes an Autograph and adds it to the Collections dictionary
         //
         // Paramters: token: the NFT to be deposited in the collection
         //
         pub fun deposit(token: @NonFungibleToken.NFT) {
             
-            // Cast the deposited token as a Autograph NFT to make sure
+            // Cast the deposited token as an Autograph NFT to make sure
             // it is the correct type
             let token <- token as! @Autograph.NFT
 
@@ -221,7 +221,7 @@ pub contract Autograph: NonFungibleToken {
             return self.ownedNFTs.keys
         }
 
-        // borrowNFT Returns a borrowed reference to a Autograph in the Collection
+        // borrowNFT Returns a borrowed reference to an Autograph in the Collection
         // so that the caller can read its ID
         //
         // Parameters: id: The ID of the NFT to get the reference for
@@ -236,7 +236,7 @@ pub contract Autograph: NonFungibleToken {
             return &self.ownedNFTs[id] as &NonFungibleToken.NFT
         }
 
-        // borrowAutograph returns a borrowed reference to a Autograph
+        // borrowAutograph returns a borrowed reference to an Autograph
         // so that the caller can read data and call methods from it.
         // They can use this to read its metadata.
         //
