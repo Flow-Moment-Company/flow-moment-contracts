@@ -1,6 +1,6 @@
 # flow-moment-contracts
 
-[Join Flow Moment Company Discord Community](https://discord.gg/mCtsWyS)
+Join the [Flow Moment Company Discord Community](https://discord.gg/mCtsWyS)
 
 ## Introduction
 
@@ -376,21 +376,3 @@ This covers much of the same ground that a spec like ERC-721 or ERC-1155 covers,
 - This version can support batch transfers of NFTs. Even though it isn't explicitly defined in the contract, a batch transfer can be done within a transaction by just withdrawing all the tokens to transfer, then depositing them wherever they need to be, all atomically.
 - Transfers can trigger actions because users can define custom `Receivers` to execute certain code when a token is sent.
 - Easy ownership indexing:  Instead of having to iterate through all tokens to find which ones you own, you have them all stored in your account's collection and can get the list of the ones you own instantly
-
-## Metadata
-
-We are still trying to think about how to do token metadata, which is very important. We want to be able to have all metadata on-chain, but we haven't made much progress discussing or designing it.
-
-## How to test the standard
-
-If you want to test out these contracts, we recommend either testing them
-with the [Flow Playground](play.onflow.org)
-or with the [Visual Studio Code Extension](https://github.com/onflow/cadence/tree/master/tools/vscode-extension).
-
-The steps to follow are:
-
-1. Deploy `NonFungibleToken.cdc`
-2. Deploy `ExampleNFT.cdc`, importing `NonFungibleToken` from the address you deployed it to.
-
-Then you can experiment with some of the other transactions and scripts in `transactions/`
-or even write your own. You'll need to replace some of the import address placeholders with addresses that you deploy to, as well as some of the transaction arguments.
