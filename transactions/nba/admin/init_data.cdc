@@ -58,10 +58,10 @@ transaction() {
         // Add the specified play ID
         setRef.addPlay(playID: 1)
 
-        let collection <- setRef.batchMintMoment(playID: 1, quantity: 1358)
+        let collection <- setRef.batchMintMoment(playID: 1, quantity: 20)
 
         // Get the account object for the recipient of the minted tokens
-        let recipient = getAccount(0x179b6b1cb6755e31)
+        let recipient = getAccount(0xe03daebed8ca0615)
 
         // get the Collection reference for the receiver
         let receiverRef = recipient.getCapability(/public/MomentCollection)!.borrow<&{TopShot.MomentCollectionPublic}>()

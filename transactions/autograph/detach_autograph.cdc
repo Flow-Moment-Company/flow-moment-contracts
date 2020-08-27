@@ -13,7 +13,7 @@ import Autograph from 0xf3fcd2c1a78f5eee
 transaction(momentID: UInt64, autographID: UInt64) {
     prepare(acct: AuthAccount) {
         // borrow a reference to the owner's collection
-        let collectionRefTopShot = acct.borrow<&TopShot.Collection>(from: /storage/TopShotCollection)
+        let collectionRefTopShot = acct.borrow<&TopShot.Collection>(from: /storage/MomentCollection)
             ?? panic("Could not borrow a reference to the stored TopShot collection")
 
         // borrow a reference to the owner's collection
