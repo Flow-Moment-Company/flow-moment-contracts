@@ -3,7 +3,7 @@ import Autograph from 0xf3fcd2c1a78f5eee
 // This transaction is what an user would use to mint a single new autograph
 // and deposit it in a user's collection
 
-transaction(metadata: {String: String}, recipientAddr: Address) {
+transaction(document: String, recipientAddr: Address) {
     prepare(acct: AuthAccount) {
 
         // Save author resource
@@ -11,7 +11,7 @@ transaction(metadata: {String: String}, recipientAddr: Address) {
         let authorRef = acct.borrow<&Autograph.Author>(from: /storage/AutographAuthor)!
 
         // Mint a new NFT
-        let autograph <- Autograph.mintAutograph(metadata: metadata, author: authorRef)
+        let autograph <- Autograph.mintAutograph(document: document, author: authorRef)
 
         // destroy the author resource
         destroy <-acct.load<@Autograph.Author>(from: /storage/AutographAuthor)

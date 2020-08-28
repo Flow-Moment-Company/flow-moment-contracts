@@ -8,7 +8,7 @@
 
     The contract manages the data associated with all the Autograph NFTs
     
-    When Autographs are minted, they are initialized with a metadata dictionary and
+    When Autographs are minted, they are initialized with a document string and
     author address.
 
     The contract also defines a Collection resource. This is an object that 
@@ -36,7 +36,7 @@ pub contract Autograph: NonFungibleToken {
     pub event ContractInitialized()
 
     // Emitted when an Autograph is minted
-    pub event AutographMinted(autographID: UInt64, metadata: {String: String}, author: Address)
+    pub event AutographMinted(autographID: UInt64, document: String, author: Address)
 
     // Events for Collection-related actions
     //
@@ -75,28 +75,25 @@ pub contract Autograph: NonFungibleToken {
         // Global unique Autograph ID
         pub let id: UInt64
         
-        // Dictionary of Autograph metadata
-        pub let metadata: {String: String}
+        // String of file content
+        pub let document: String
 
         // Address of NFT minter
         pub let author: Address
 
-        init(metadata: {String: String}, author: Address) {
-            pre {
-                metadata.length != 0: "New Autograph metadata cannot be empty"
-            }
+        init(document: String, author: Address) {
             // Increment the global Autograph IDs
             Autograph.totalSupply = Autograph.totalSupply + UInt64(1)
 
             self.id = Autograph.totalSupply
 
-            // Set the metadata struct
-            self.metadata = metadata
+            // Set the document string
+            self.document = document
 
             // Set author address
             self.author = author
 
-            emit AutographMinted(autographID: self.id, metadata: self.metadata, author: self.author)
+            emit AutographMinted(autographID: self.id, document: self.document, author: self.author)
         }
 
         // If the Autograph is destroyed, emit an event to indicate 
@@ -238,7 +235,7 @@ pub contract Autograph: NonFungibleToken {
 
         // borrowAutograph returns a borrowed reference to an Autograph
         // so that the caller can read data and call methods from it.
-        // They can use this to read its metadata.
+        // They can use this to read its fields.
         //
         // Parameters: id: The ID of the NFT to get the reference for
         //
@@ -286,13 +283,13 @@ pub contract Autograph: NonFungibleToken {
 
     // mintAutograph mints a new Autograph and returns the newly minted Autograph
     // 
-    // Parameters: metadata: Dictionary of Autograph metadata
+    // Parameters: document: String of Autograph file content
     //             author: Author resource reference to get author address
     //
     // Returns: The NFT that was minted
     // 
-    pub fun mintAutograph(metadata: {String: String}, author: &Author): @NFT {
-        return <-create NFT(metadata: metadata, author: author.owner!.address)
+    pub fun mintAutograph(document: String, author: &Author): @NFT {
+        return <-create NFT(document: document, author: author.owner!.address)
     }
 
     // -----------------------------------------------------------------------

@@ -8,9 +8,9 @@ import Autograph from 0xf3fcd2c1a78f5eee
 // Parameters:
 //
 // momentID: The id of the moment to attach autograph
-// metadata: Dictionary of Autograph metadata
+// document: String of Autograph document
 
-transaction(momentID: UInt64, metadata: {String: String}) {
+transaction(momentID: UInt64, document: String) {
     prepare(acct: AuthAccount) {
         // borrow a reference to the owner's collection
         let collectionRefTopShot = acct.borrow<&TopShot.Collection>(from: /storage/MomentCollection)
@@ -25,7 +25,7 @@ transaction(momentID: UInt64, metadata: {String: String}) {
         let authorRef = acct.borrow<&Autograph.Author>(from: /storage/AutographAuthor)!
 
         // Mint a new NFT
-        let autograph <- Autograph.mintAutograph(metadata: metadata, author: authorRef)
+        let autograph <- Autograph.mintAutograph(document: document, author: authorRef)
 
         // destroy the author resource
         destroy <-acct.load<@Autograph.Author>(from: /storage/AutographAuthor)
