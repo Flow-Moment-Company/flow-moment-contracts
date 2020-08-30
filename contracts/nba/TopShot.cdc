@@ -82,6 +82,10 @@ pub contract TopShot: NonFungibleToken {
     pub event Withdraw(id: UInt64, from: Address?)
     // Emitted when a moment is deposited into a Collection
     pub event Deposit(id: UInt64, to: Address?)
+    // Emitted when an autograph is withdrawn from a moment
+    pub event WithdrawAutograph(id: UInt64, from: UInt64)
+    // Emitted when an autograph is deposited into a moment
+    pub event DepositAutograph(id: UInt64, to: UInt64)
 
     // Emitted when a Moment is destroyed
     pub event MomentDestroyed(id: UInt64)
@@ -425,7 +429,7 @@ pub contract TopShot: NonFungibleToken {
 
         // Dictionary of Autograph conforming tokens
         // NFT is a resource type with a UInt64 ID field
-        pub let autographs: @{UInt64: Autograph.NFT}
+        access(contract) let autographs: @{UInt64: Autograph.NFT}
 
         init(serialNumber: UInt32, playID: UInt32, setID: UInt32) {
             // Increment the global Moment IDs
@@ -439,6 +443,34 @@ pub contract TopShot: NonFungibleToken {
             self.autographs <- {}
 
             emit MomentMinted(momentID: self.id, playID: playID, setID: self.data.setID, serialNumber: self.data.serialNumber)
+        }
+
+        // getAutographIDs returns an array of the autograph IDs that are in the moment
+        pub fun getAutographIDs(): [UInt64] {
+            return self.autographs.keys
+        }
+
+        // borrowAutograph returns a borrowed reference to an Autograph
+        // so that the caller can read data and call methods from it.
+        // They can use this to read its document or author by reading
+        // those fields from the smart contract.
+        //
+        // Parameters: autographID: The ID of the NFT to get the reference for
+        //
+        // Returns: A reference to the NFT
+        pub fun borrowAutograph(autographID: UInt64) : &Autograph.NFT? {
+            return &self.autographs[autographID] as &Autograph.NFT
+        }
+
+        // deposit takes an Autograph and adds it to the Moments dictionary
+        //
+        // Paramters: autograph: the NFT to be deposited in the moment
+        //
+        pub fun depositAutograph(autograph: @Autograph.NFT) {
+            let id = autograph.id
+            let oldAutograph <- self.autographs[id] <- autograph
+            emit DepositAutograph(id: id, to: self.id)
+            destroy oldAutograph
         }
 
         // If the Moment is destroyed, emit an event to indicate 
@@ -596,6 +628,28 @@ pub contract TopShot: NonFungibleToken {
             
             // Return the withdrawn tokens
             return <-batchCollection
+        }
+
+        // withdraw removes an Autograph from the Moment and moves it to the caller
+        //
+        // Parameters: momentID: The ID of the NFT that owns the autograph to be removed
+        //             autographID: The ID of the NFT that is to be removed from the moment
+        //
+        // returns: @Autograph.NFT the token that was withdrawn
+        pub fun withdrawAutograph(momentID: UInt64, autographID: UInt64): @Autograph.NFT {
+
+            // Borrow moment
+            let moment = self.borrowMoment(id: momentID)
+                ?? panic("Cannot withdraw: Moment does not exist in the collection")
+
+            // Remove the nft from the Collection
+            let autograph <- moment.autographs.remove(key: autographID)
+                ?? panic("Cannot withdraw: Autograph does not exist in the moment")
+
+            emit WithdrawAutograph(id: autograph.id, from: moment.id)
+            
+            // Return the withdrawn autograph
+            return <-autograph
         }
 
         // deposit takes a Moment and adds it to the Collections dictionary

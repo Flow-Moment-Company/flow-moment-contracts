@@ -1,14 +1,13 @@
-import NonFungibleToken from 0x01cf0e2f2f715450
 import TopShot from 0x179b6b1cb6755e31
 import Autograph from 0xf3fcd2c1a78f5eee
 
 // This transaction is how a TopShot + Autograph user would transfer
-// an autograph from a moment in their account to their account
+// an autograph from their account to a moment in their account
 
 // Parameters:
 //
-// momentID: The id of the moment to detach autograph
-// autographID: The id of the autograph to be detached from the moment
+// momentID: The id of the moment to attach autograph
+// autographID: The id of the autograph to be attached to the moment
 
 transaction(momentID: UInt64, autographID: UInt64) {
     prepare(acct: AuthAccount) {
@@ -24,11 +23,11 @@ transaction(momentID: UInt64, autographID: UInt64) {
         let moment = collectionRefTopShot.borrowMoment(id: momentID)
             ?? panic("Could not borrow a reference to the specified moment")
 
-        // Detach the autograph from the moment
-        let autograph <- moment.autographs.remove(key: autographID) as! @Autograph.NFT
-
-        // deposit the NFT
-        collectionRefAutograph.deposit(token: <-autograph)
+        // withdraw the NFT
+        let autograph <- collectionRefAutograph.withdraw(withdrawID: autographID) as! @Autograph.NFT
+        
+        // Deposit the autograph to the moment
+        moment.depositAutograph(autograph: <-autograph)
     }
 }
  

@@ -8,6 +8,6 @@ import TopShot from 0x179b6b1cb6755e31
 pub fun main(account: Address, id: UInt64): [UInt64] {
     let token = getAccount(account).getCapability(/public/MomentCollection)!
                 .borrow<&{TopShot.MomentCollectionPublic}>()!.borrowMoment(id: id)!
-    log(token.autographs.keys)
-    return token.autographs.keys
+    log(token.getAutographIDs())
+    return token.getAutographIDs()
 }

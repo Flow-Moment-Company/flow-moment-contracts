@@ -1,5 +1,4 @@
 import TopShot from 0x179b6b1cb6755e31
-import Autograph from 0xf3fcd2c1a78f5eee
 
 // This script gets the document associated with a autograph
 // in a moment by looking up its ID and then searching
@@ -24,7 +23,9 @@ pub fun main(account: Address, momentID: UInt64, autographID: UInt64): String {
     let moment = collectionRef.borrowMoment(id: momentID)
         ?? panic("Could not borrow a reference to the specified moment")
 
-    let autograph = &moment.autographs[autographID] as &Autograph.NFT
+    // Borrow a reference to the specified autograph
+    let autograph = moment.borrowAutograph(autographID: autographID)
+        ?? panic("Could not borrow a reference to the specified autograph")
 
     // Get the autograph's document
     log(autograph.document)
